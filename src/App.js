@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import {baseDatos} from './ConfigFirebase';
-import ContactoNuevo from './componentes/contactoNuevo';
-import Contacto from './componentes/contacto';
+import ContactoNuevo from './contactoNuevo';
+import Contacto from'./contacto';
 import './App.css';
 
 
@@ -17,8 +17,8 @@ function App() {
     const listado = [];
     baseDatos.collection('contactos').get()
     .then(resultado => {
-      resultado.forEach( contacto=>{
-        listado.push(contacto.data());
+      resultado.forEach( Contacto=>{
+        listado.push(Contacto.data());
       })
       setContactos(listado);
     }).catch(error => console.log(error));
@@ -31,9 +31,9 @@ function App() {
       <header className="App-header">
         <ContactoNuevo addNuevoContacto = {addNuevoContacto}/>
         {
-          contactos && contactos.length >0 && contactos.slice().reverse().map((contacto,i)=>{
-            const{nombre, apellido, telefono}= contacto;
-            return(<contacto key={i}nombre={nombre} apellido={apellido}telefono={telefono}/>)
+          contactos && contactos.length >0 && contactos.slice().reverse().map((Contacto,i)=>{
+            const{nombre, apellido, telefono}= Contacto;
+            return(<Contacto key={i}nombre={nombre} apellido={apellido}telefono={telefono}/>)
           })
         }
       </header>

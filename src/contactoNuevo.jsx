@@ -1,5 +1,5 @@
 import React, {useRef} from 'react';
-import { baseDatos } from '../ConfigFirebase';
+import { baseDatos } from './ConfigFirebase';
 import './contacto';
 
 
