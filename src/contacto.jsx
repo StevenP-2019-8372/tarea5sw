@@ -1,5 +1,5 @@
 import React from 'react';
-import './Contactosg.css';
+import'./contacto.css';
 
 function Contacto({nombre, apellido, telefono}){
     return(

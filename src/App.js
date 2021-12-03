@@ -1,41 +1,45 @@
+
+import Contacto from './contacto';
 import {useState, useEffect} from 'react';
-import {baseDatos} from './ConfigFirebase';
-import ContactoNuevo from './contactoNuevo';
-import Contacto from'./contacto';
+import {baseDeDato} from './ConfigFirebase';
+import ContactoNuevo from './ContactoNuevo';
 import './App.css';
 
 
 function App() {
   const [contactos, setContactos] = useState([]);
 
-  function addNuevoContacto(contacto){
-    //setContactos(contactos.slice().push(contacto));
-    CargarContactos();
+  const agregarNuevoContacto = (contacto)=>{
+    const tempContactos = contactos.slice();
+    tempContactos.push(contacto);
+    setContactos(tempContactos);
   }
 
-  function CargarContactos(){
+  useEffect(()=>{
     const listado = [];
-    baseDatos.collection('contactos').get()
-    .then(resultado => {
-      resultado.forEach( Contacto=>{
-        listado.push(Contacto.data());
+
+    baseDeDato.collection('contactos')
+    .get()
+    .then( resultado => {
+      resultado.forEach( contacto=>{
+        listado.push(contacto.data());
       })
       setContactos(listado);
-    }).catch(error => console.log(error));
-  }
+    }).catch( error=>console.log(error));
+  }, []);
 
-  useEffect(CargarContactos, []);
-  
   return (
     <div className="App">
       <header className="App-header">
-        <ContactoNuevo addNuevoContacto = {addNuevoContacto}/>
+        <ContactoNuevo agregarNuevoContacto={agregarNuevoContacto} />
         {
-          contactos && contactos.length >0 && contactos.slice().reverse().map((Contacto,i)=>{
-            const{nombre, apellido, telefono}= Contacto;
-            return(<Contacto key={i}nombre={nombre} apellido={apellido}telefono={telefono}/>)
+          contactos && contactos.slice().reverse().map((contacto, i)=>{
+              const {nombre, apellido, telefono} = contacto;
+              return (<Contacto key={i} nombre={nombre} apellido={apellido} telefono={telefono} />) 
           })
         }
+        
+
       </header>
     </div>
   );

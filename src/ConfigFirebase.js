@@ -1,7 +1,7 @@
 import firebase from'firebase/app';
 import 'firebase/firestore';
 
-const firebaseConfig = {
+var firebaseConfig = {
     apiKey: "AIzaSyAEwt11d89CfxJGWNVdBbhUSmCrktAV9-4",
   authDomain: "tare5d.firebaseapp.com",
   projectId: "tare5d",
@@ -11,5 +11,5 @@ const firebaseConfig = {
   };
 firebase.initializeApp(firebaseConfig);
 
-export const baseDatos = firebase.firestore();
+export const baseDeDato = firebase.firestore();
 export default firebase;
